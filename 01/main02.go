@@ -14,27 +14,17 @@ func main() {
 	}
 	defer file.Close()
 
+	var queue []int
+	counter := 0
 	scan := bufio.NewScanner(file)
 
-	var depthList []int
-	// let's read all the lines
 	for scan.Scan() {
 		newDepth, err := strconv.Atoi(scan.Text())
 		if err != nil {
-			fmt.Printf("Error converting text to int. %s\n", err)
+			panic(err)
 		}
 
-		depthList = append(depthList, newDepth)
-	}
-	if err := scan.Err(); err != nil {
-		panic(fmt.Sprintf("Scanner contained an error: %s\n", err))
-	}
-
-	var queue []int
-	counter := 0
-
-	for _, v := range depthList {
-		queue = append(queue, v)
+		queue = append(queue, newDepth)
 		if len(queue) == 4 {
 			a := queue[0] + queue[1] + queue[2]
 			b := queue[1] + queue[2] + queue[3]
@@ -43,7 +33,12 @@ func main() {
 			}
 			queue = queue[1:4]
 		}
+
 	}
+	if err := scan.Err(); err != nil {
+		panic(fmt.Sprintf("Scanner contained an error: %s\n", err))
+	}
+
 	// how many?
 	fmt.Printf("### %d measurements larger than the previous one.\n", counter)
 }
