@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	file, err := os.Open("example")
+	file, err := os.Open("input")
 	must(err)
 	defer file.Close()
 
