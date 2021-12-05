@@ -9,9 +9,7 @@ import (
 
 func main() {
 	file, err := os.Open("input")
-	if err != nil {
-		panic(err)
-	}
+	must(err)
 	defer file.Close()
 
 	var queue []int
@@ -20,9 +18,7 @@ func main() {
 
 	for scan.Scan() {
 		newDepth, err := strconv.Atoi(scan.Text())
-		if err != nil {
-			panic(err)
-		}
+		must(err)
 
 		queue = append(queue, newDepth)
 		if len(queue) == 4 {
@@ -35,10 +31,13 @@ func main() {
 		}
 
 	}
-	if err := scan.Err(); err != nil {
-		panic(fmt.Sprintf("Scanner contained an error: %s\n", err))
-	}
+	must(scan.Err())
 
-	// how many?
 	fmt.Printf("### %d measurements larger than the previous one.\n", counter)
+}
+
+func must(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
