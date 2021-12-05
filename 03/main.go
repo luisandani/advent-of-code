@@ -8,12 +8,14 @@ import (
 	"strings"
 )
 
+const reportLength = 12 // 5 for the example
+
 func main() {
 	file, err := os.Open("input")
 	must(err)
 	defer file.Close()
 
-	byts := make([]int, 12) // 5 for the example
+	byts := make([]int, reportLength)
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		bn := strings.Split(scanner.Text(), "")
