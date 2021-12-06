@@ -105,7 +105,6 @@ func (bc *bingoCard) CheckNumber(n int) (bingo bool) {
 			if bc.Numbers[i][j] == n {
 				bc.RowHit[i]++
 				bc.ColumnHit[j]++
-				fmt.Printf("Hit! N:%d Row:%d Column:%d\n", n, i, j)
 				if bc.RowHit[i] == 5 || bc.ColumnHit[j] == 5 {
 					return true
 				}
@@ -115,10 +114,8 @@ func (bc *bingoCard) CheckNumber(n int) (bingo bool) {
 	return false
 }
 
+// CalcScore sums all unmarked numbers then multiplies by the last called number
 func (bc *bingoCard) CalcScore() int {
-	// sum all unmarked numbers
-	fmt.Printf("Sum: %d\n", bc.sumUnmarkedNumbers())
-	// multiply the sum by the last called number
 	return bc.sumUnmarkedNumbers() * bc.CalledNumbers[len(bc.CalledNumbers)-1]
 }
 
@@ -132,7 +129,6 @@ func (bc *bingoCard) sumUnmarkedNumbers() int {
 			}
 		}
 	}
-
 	return sum
 }
 
