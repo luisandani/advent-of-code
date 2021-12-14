@@ -30,7 +30,7 @@ func subtractMostAndLeastCommonElements(elements map[string]int) int {
 }
 
 func calculateAllPairsPossible(template string, rules map[string]string, steps int) map[string]int {
-	mapped := make(map[string]int) //var mapped = mutableMapOf<String, Long>()
+	mapped := make(map[string]int)
 
 	// START - we map the template
 	for i := 0; i < len(template)-1; i++ {
